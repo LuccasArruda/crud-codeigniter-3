@@ -14,7 +14,7 @@ class Customers extends CI_Controller {
         $data['translatedTitle'] = 'Clientes';
 
         $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar', $data);
+        $this->load->view('templates/searchbar', $data);
         $this->load->view('pages/customers/index', $data);
         $this->load->view('templates/footer');
     }

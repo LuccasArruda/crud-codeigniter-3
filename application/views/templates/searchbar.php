@@ -7,5 +7,11 @@
           </a>
           <h1 class="text-center fw-light text-secondary"><?php echo $translatedTitle; ?></h1>
         </div>
+        <div class="d-flex flex-row align-items-center mt-5 mx-5 bg-white rounded-5 p-2 shadow-sm">
+          <input type="text" class="form-control rounded-5" placeholder="Pesquisar">
+          <a class="material-symbols-outlined text-decoration-none search-button mx-1 rounded-circle p-1" href="#">
+            search
+          </a>
+        </div>
       </nav>
     </header>

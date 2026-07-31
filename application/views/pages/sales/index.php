@@ -20,8 +20,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td><?php echo $sale['VALOR_TOTAL']; ?></td>
         <td><?php echo $sale['NOME_FANTASIA']; ?></td>
         <td>
-          <a href="#" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
-          <a href="#" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
+          <a href="<?php echo base_url("index.php/sale/edit/{$sale['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
+          <a href="<?php echo base_url("index.php/sale/delete/{$sale['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>
