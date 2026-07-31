@@ -23,9 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td><?php echo $customer['CNPJ']; ?></td>
         <td><?php echo $customer['ENDERECO']; ?></td>
         <td><?php echo $customer['VALOR_FATURAMENTO']; ?></td>
-        <td class="">
-          <a href="#" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
-          <a href="#" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
+        <td>
+          <a href="<?php echo base_url("index.php/customer/edit/{$customer['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
+          <a href="<?php echo base_url("index.php/customer/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>

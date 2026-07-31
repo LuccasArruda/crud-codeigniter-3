@@ -29,8 +29,10 @@ class Customers extends CI_Controller {
         }
 
         $data['title'] = $data['customer']['NOME_FANTASIA'];
+        $data['translatedTitle'] = 'Detalhes do Cliente';
         
         $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
         $this->load->view('pages/customers/view', $data);
         $this->load->view('templates/footer');        
 
