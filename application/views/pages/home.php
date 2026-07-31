@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</a>
 			</div>
 			<div class="col-sm-6">
-				<a href="<?php echo base_url('index.php/customer'); ?>" class="card text-decoration-none card-animation">
+				<a href="<?php echo base_url('index.php/customers'); ?>" class="card text-decoration-none card-animation">
 					<div class="card-body text-center">
 						<i class="material-symbols-outlined" style="font-size: 6em;">
 						person
