@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['customers'] = 'customers';
 $route['customer/edit/(:num)'] = 'customers/view/$1';
+$route['customer/new'] = 'customers/new';
 
 $route['sales'] = 'sales';
 $route['sale/edit/(:num)'] = 'sales/view/$1';
