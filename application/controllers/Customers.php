@@ -61,11 +61,7 @@ class Customers extends CI_Controller {
         $data['title'] = 'Create Customer';
         $data['translatedTitle'] = 'Criar Cliente';
 
-        $this->form_validation->set_rules('razaoSocial', 'Razão Social', 'required');
-        $this->form_validation->set_rules('nomeFantasia', 'Nome Fantasia', 'required');
-        $this->form_validation->set_rules('cnpj', 'CNPJ', 'required');
-        $this->form_validation->set_rules('valorFaturamento', 'Valor Faturamento', 'required');
-        $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+        $this->validateCustomerInfo();
 
         if ($this->form_validation->run() === FALSE) {
             $this->loadCustomerView($data);
@@ -79,9 +75,40 @@ class Customers extends CI_Controller {
             );
 
             $this->db->insert('clientes', $data);
-            $this->index();
+            redirect('customers');
         }
     }
+    
+    public function validateCustomerInfo(){
+        $this->form_validation->set_rules('razaoSocial', 'Razão Social', 'required');
+        $this->form_validation->set_rules('nomeFantasia', 'Nome Fantasia', 'required');
+        $this->form_validation->set_rules('cnpj', 'CNPJ', 'required');
+        $this->form_validation->set_rules('valorFaturamento', 'Valor Faturamento', 'required');
+        $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+    }
 
+    public function update($id){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        
+        $data['title'] = 'Update Customer';
+        $data['translatedTitle'] = 'Atualizar Cliente';
+
+        $this->validateCustomerInfo();
+        if ($this->form_validation->run() === FALSE) {
+            $this->loadCustomerView($data);
+        } else {
+            $data = array(
+                'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
+                'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
+                'CNPJ' => $this->input->post('cnpj'),
+                'VALOR_FATURAMENTO' => $this->input->post('valorFaturamento'),
+                'ENDERECO' => $this->input->post('endereco')
+            );
+
+            $this->db->update('clientes', $data, array('ID' => $id));
+            redirect('customers');
+        }
+    }
 
 }
