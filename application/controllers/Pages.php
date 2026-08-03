@@ -2,8 +2,7 @@
 class Pages extends CI_Controller {
     public function view($page = 'home', $translatedTitle = 'Início')
     {
-        if(!file_exists(APPPATH.'views/pages/'.$page.'.php'))
-        {
+        if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
             show_404();
         }
 

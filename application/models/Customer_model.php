@@ -1,10 +1,12 @@
 <?php
 class Customer_model extends CI_Model{
-    public function __construct(){
+    public function __construct()
+    {
         $this->load->database();
     }
 
-    public function get_customers($id = FALSE){
+    public function get_customers($id = FALSE)
+    {
         if($id === FALSE){
             $query = $this->db->get('CLIENTES');
             return $query->result_array();
@@ -14,7 +16,8 @@ class Customer_model extends CI_Model{
         return $query->row_array();
     }
 
-    public function search_customers($searchTerm){
+    public function searchCustomers($searchTerm)
+    {
         $this->db->like('NOME_FANTASIA', $searchTerm);
         $this->db->or_like('RAZAO_SOCIAL', $searchTerm);
         $this->db->or_like('CNPJ', $searchTerm);

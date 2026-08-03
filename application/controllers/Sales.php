@@ -20,6 +20,19 @@ class Sales extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function search()
+    {
+        $searchTerm = $this->input->get('search');
+        $data['sales'] = $this->Sale_model->searchSales($searchTerm);
+        $data['title'] = 'Search Results';
+        $data['translatedTitle'] = 'Vendas';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/searchbar', $data);
+        $this->load->view('pages/sales/index', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function view($id = NULL)
     {
         $data['sale'] = $this->Sale_model->get_sales($id);
@@ -98,7 +111,8 @@ class Sales extends CI_Controller {
         redirect('sales');
     }
 
-    public function returnSaleData(){
+    public function returnSaleData()
+    {
         $data = array(
             'ID_CLIENTE' => $this->input->post('idCliente'),
             'DATA_CRIACAO' => $this->input->post('dataGeracao'),

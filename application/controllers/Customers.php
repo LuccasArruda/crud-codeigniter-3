@@ -23,9 +23,9 @@ class Customers extends CI_Controller {
     public function search()
     {
         $searchTerm = $this->input->get('search');
-        $data['customers'] = $this->Customer_model->search_customers($searchTerm);
+        $data['customers'] = $this->Customer_model->searchCustomers($searchTerm);
         $data['title'] = 'Search Results';
-        $data['translatedTitle'] = 'Resultados da Pesquisa';
+        $data['translatedTitle'] = 'Clientes';
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/searchbar', $data);

@@ -17,5 +17,19 @@ class Sale_model extends CI_Model {
         }
 
         return $this->db->get()->result_array();
-    } 
+    }
+
+    public function searchSales($searchTerm) 
+    {
+        $this->db
+             ->select('VENDAS.*, CLIENTES.NOME_FANTASIA AS NOME_FANTASIA')
+             ->from('VENDAS')
+             ->join('CLIENTES', 'VENDAS.ID_CLIENTE = CLIENTES.ID', 'left')
+             ->like('CLIENTES.NOME_FANTASIA', $searchTerm)
+             ->or_like('CLIENTES.NOME_FANTASIA', $searchTerm)
+             ->or_like('VENDAS.DATA_CRIACAO', $searchTerm)
+             ->or_like('VENDAS.VALOR_TOTAL', $searchTerm);
+
+        return $this->db->get()->result_array();
+    }
 }
