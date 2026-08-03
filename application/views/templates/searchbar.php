@@ -7,11 +7,11 @@
           </a>
           <h1 class="text-center fw-light text-secondary"><?php echo $translatedTitle; ?></h1>
         </div>
-        <div class="d-flex flex-row align-items-center mt-5 mx-5 bg-white rounded-5 p-2 shadow-sm">
-          <input type="text" class="form-control rounded-5" placeholder="Pesquisar">
-          <a class="material-symbols-outlined text-decoration-none search-button mx-1 rounded-circle p-1" href="#">
-            search
-          </a>
-        </div>
+        <form action="<?php echo base_url('index.php/customers/search'); ?>" method="get" class="d-flex flex-row align-items-center mt-5 mx-5 bg-white rounded-5 p-2 shadow-sm">
+          <input type="text" class="form-control rounded-5 d-flex" placeholder="Pesquisar" name="search" id="search">
+          <button class="btn btn-outline-primary d-flex rounded-circle px-2 ms-1" type="submit">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+        </form>
       </nav>
     </header>

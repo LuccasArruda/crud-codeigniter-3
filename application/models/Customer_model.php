@@ -13,4 +13,15 @@ class Customer_model extends CI_Model{
         $query = $this->db->get_where('CLIENTES', array('id' => $id));
         return $query->row_array();
     }
+
+    public function search_customers($searchTerm){
+        $this->db->like('NOME_FANTASIA', $searchTerm);
+        $this->db->or_like('RAZAO_SOCIAL', $searchTerm);
+        $this->db->or_like('CNPJ', $searchTerm);
+        $this->db->or_like('ENDERECO', $searchTerm);
+        $this->db->or_like('VALOR_FATURAMENTO', $searchTerm);
+        $this->db->or_like('ID', $searchTerm);
+        $query = $this->db->get('CLIENTES');
+        return $query->result_array();
+    }
 }

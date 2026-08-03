@@ -20,6 +20,19 @@ class Customers extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function search()
+    {
+        $searchTerm = $this->input->get('search');
+        $data['customers'] = $this->Customer_model->search_customers($searchTerm);
+        $data['title'] = 'Search Results';
+        $data['translatedTitle'] = 'Resultados da Pesquisa';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/searchbar', $data);
+        $this->load->view('pages/customers/index', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function view($id = NULL)
     {
         $data['customer'] = $this->Customer_model->get_customers($id);
