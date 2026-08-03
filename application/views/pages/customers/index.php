@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td><?php echo $customer['VALOR_FATURAMENTO']; ?></td>
         <td>
           <a href="<?php echo base_url("index.php/customer/edit/{$customer['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
-          <a href="<?php echo base_url("index.php/customer/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
+          <a href="<?php echo base_url("index.php/customers/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>

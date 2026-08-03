@@ -111,4 +111,9 @@ class Customers extends CI_Controller {
         }
     }
 
+    public function delete($id){
+        $this->db->delete('clientes', array('ID' => $id));
+        redirect('customers');
+    }
+
 }
