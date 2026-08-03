@@ -74,22 +74,26 @@ class Customers extends CI_Controller {
         $data['title'] = 'Create Customer';
         $data['translatedTitle'] = 'Criar Cliente';
 
-        $this->validateCustomerInfo();
-
-        if ($this->form_validation->run() === FALSE) {
+        $validCustomer = $this->validateCustomerInfo();
+        if (!$validCustomer) {
             $this->loadCustomerView($data);
-        } else {
-            $data = array(
-                'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
-                'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
-                'CNPJ' => $this->input->post('cnpj'),
-                'VALOR_FATURAMENTO' => $this->input->post('valorFaturamento'),
-                'ENDERECO' => $this->input->post('endereco')
-            );
-
-            $this->db->insert('clientes', $data);
-            redirect('customers');
+            return;
         }
+
+        $this->db->insert('clientes', $this->returnCustomerData());
+        redirect('customers');
+    }
+
+    public function returnCustomerData(){
+        $data = array(
+            'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
+            'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
+            'CNPJ' => $this->input->post('cnpj'),
+            'VALOR_FATURAMENTO' => $this->input->post('valorFaturamento'),
+            'ENDERECO' => $this->input->post('endereco')
+        );
+
+        return $data;
     }
     
     public function validateCustomerInfo(){
@@ -98,6 +102,8 @@ class Customers extends CI_Controller {
         $this->form_validation->set_rules('cnpj', 'CNPJ', 'required');
         $this->form_validation->set_rules('valorFaturamento', 'Valor Faturamento', 'required');
         $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+
+        return $this->form_validation->run();
     }
 
     public function update($id){
@@ -107,21 +113,22 @@ class Customers extends CI_Controller {
         $data['title'] = 'Update Customer';
         $data['translatedTitle'] = 'Atualizar Cliente';
 
-        $this->validateCustomerInfo();
-        if ($this->form_validation->run() === FALSE) {
+        $validCustomer = $this->validateCustomerInfo();
+        if (!$validCustomer) {
             $this->loadCustomerView($data);
-        } else {
-            $data = array(
-                'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
-                'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
-                'CNPJ' => $this->input->post('cnpj'),
-                'VALOR_FATURAMENTO' => $this->input->post('valorFaturamento'),
-                'ENDERECO' => $this->input->post('endereco')
-            );
+            return;
+        } 
 
-            $this->db->update('clientes', $data, array('ID' => $id));
-            redirect('customers');
-        }
+        $data = array(
+            'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
+            'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
+            'CNPJ' => $this->input->post('cnpj'),
+            'VALOR_FATURAMENTO' => $this->input->post('valorFaturamento'),
+            'ENDERECO' => $this->input->post('endereco')
+        );
+
+        $this->db->update('clientes', $data, array('ID' => $id));
+        redirect('customers');
     }
 
     public function delete($id){

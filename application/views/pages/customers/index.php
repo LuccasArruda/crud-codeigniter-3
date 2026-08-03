@@ -31,5 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php endforeach; ?>
     </tbody>
   </table>
-  <button type="button" class="btn btn-primary mt-3" onclick="window.location.href='<?php echo base_url('index.php/customer/new'); ?>'">Adicionar Cliente</button>
+  <button type="button" class="btn btn-outline-primary d-flex align-items-center" onclick="window.location.href='<?php echo base_url('index.php/customer/new'); ?>'">
+    <span class="material-symbols-outlined me-1">add</span>
+    Novo Cliente
+  </button>
 </main>     

@@ -56,6 +56,7 @@ $route['customer/new'] = 'customers/new';
 
 $route['sales'] = 'sales';
 $route['sale/edit/(:num)'] = 'sales/view/$1';
+$route['sale/new'] = 'sales/new';
 
 $route['default_controller'] = 'pages/view';
 $route['(:any)'] = 'pages/view/$1';
