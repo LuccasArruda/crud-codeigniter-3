@@ -58,13 +58,6 @@ class Customers extends CI_Controller {
 
         $this->loadCustomerView($data);
     }
-        
-    public function loadCustomerView($data){
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('pages/customers/view', $data);
-        $this->load->view('templates/footer');        
-    }
 
     public function create(){
 
@@ -84,28 +77,6 @@ class Customers extends CI_Controller {
         redirect('customers');
     }
 
-    public function returnCustomerData(){
-        $data = array(
-            'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
-            'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
-            'CNPJ' => $this->input->post('cnpj'),
-            'VALOR_FATURAMENTO' => $this->input->post('valorFaturamento'),
-            'ENDERECO' => $this->input->post('endereco')
-        );
-
-        return $data;
-    }
-    
-    public function validateCustomerInfo(){
-        $this->form_validation->set_rules('razaoSocial', 'Razão Social', 'required');
-        $this->form_validation->set_rules('nomeFantasia', 'Nome Fantasia', 'required');
-        $this->form_validation->set_rules('cnpj', 'CNPJ', 'required');
-        $this->form_validation->set_rules('valorFaturamento', 'Valor Faturamento', 'required');
-        $this->form_validation->set_rules('endereco', 'Endereço', 'required');
-
-        return $this->form_validation->run();
-    }
-
     public function update($id){
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -119,6 +90,18 @@ class Customers extends CI_Controller {
             return;
         } 
 
+        $this->db->where('ID', $id);
+        $this->db->update('clientes', $this->returnCustomerData());
+        redirect('customers');
+    }
+
+    public function delete($id){
+        $this->db->where('ID', $id);
+        $this->db->delete('clientes');
+        redirect('customers');
+    }
+
+    public function returnCustomerData(){
         $data = array(
             'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
             'NOME_FANTASIA' => $this->input->post('nomeFantasia'),
@@ -127,13 +110,23 @@ class Customers extends CI_Controller {
             'ENDERECO' => $this->input->post('endereco')
         );
 
-        $this->db->update('clientes', $data, array('ID' => $id));
-        redirect('customers');
+        return $data;
     }
 
-    public function delete($id){
-        $this->db->delete('clientes', array('ID' => $id));
-        redirect('customers');
+    public function validateCustomerInfo(){
+        $this->form_validation->set_rules('razaoSocial', 'Razão Social', 'required');
+        $this->form_validation->set_rules('nomeFantasia', 'Nome Fantasia', 'required');
+        $this->form_validation->set_rules('cnpj', 'CNPJ', 'required');
+        $this->form_validation->set_rules('valorFaturamento', 'Valor Faturamento', 'required');
+        $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+
+        return $this->form_validation->run();
     }
 
+    public function loadCustomerView($data){
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('pages/customers/view', $data);
+        $this->load->view('templates/footer');        
+    }
 }

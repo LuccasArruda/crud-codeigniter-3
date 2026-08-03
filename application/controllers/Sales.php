@@ -26,8 +26,7 @@ class Sales extends CI_Controller {
         $data['customers'] = $this->Customer_model->get_customers();
         $data['action'] = "sales/update/{$id}";
         
-        if (empty($data['sale'])) 
-        {
+        if (empty($data['sale'])){
             show_404();
         }
 
@@ -46,14 +45,6 @@ class Sales extends CI_Controller {
         $data['action'] = 'sales/create';
 
         $this->loadSaleView($data);
-    }
-
-    public function loadSaleView($data)
-    {
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/navbar', $data);
-        $this->load->view('pages/sales/view', $data);
-        $this->load->view('templates/footer');
     }
 
     public function create()
@@ -75,25 +66,6 @@ class Sales extends CI_Controller {
                 
         $this->db->insert('vendas', $this->returnSaleData());
         redirect('sales');
-    }
-
-    public function returnSaleData(){
-        $data = array(
-            'ID_CLIENTE' => $this->input->post('idCliente'),
-            'DATA_CRIACAO' => $this->input->post('dataGeracao'),
-            'VALOR_TOTAL' => $this->input->post('valorTotal')
-        );
-
-        return $data;
-    }
- 
-    public function validateSaleInfo()
-    {
-        $this->form_validation->set_rules('idCliente', 'Cliente', 'required');
-        $this->form_validation->set_rules('dataGeracao', 'Data de Geração', 'required|date');
-        $this->form_validation->set_rules('valorTotal', 'Valor Total', 'required|numeric');
-
-        return $this->form_validation->run();
     }
 
     public function update($id)
@@ -121,7 +93,35 @@ class Sales extends CI_Controller {
 
     public function delete($id)
     {
-        $this->db->delete('vendas', array('ID' => $id));
+        $this->db->where('ID', $id);
+        $this->db->delete('vendas');
         redirect('sales');
+    }
+
+    public function returnSaleData(){
+        $data = array(
+            'ID_CLIENTE' => $this->input->post('idCliente'),
+            'DATA_CRIACAO' => $this->input->post('dataGeracao'),
+            'VALOR_TOTAL' => $this->input->post('valorTotal')
+        );
+
+        return $data;
+    }
+ 
+    public function validateSaleInfo()
+    {
+        $this->form_validation->set_rules('idCliente', 'Cliente', 'required');
+        $this->form_validation->set_rules('dataGeracao', 'Data de Geração', 'required|date');
+        $this->form_validation->set_rules('valorTotal', 'Valor Total', 'required|numeric');
+
+        return $this->form_validation->run();
+    }
+
+    public function loadSaleView($data)
+    {
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/navbar', $data);
+        $this->load->view('pages/sales/view', $data);
+        $this->load->view('templates/footer');
     }
 }
