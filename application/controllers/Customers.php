@@ -14,10 +14,7 @@ class Customers extends CI_Controller {
         $data['title'] = 'Customers';
         $data['translatedTitle'] = 'Clientes';
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/searchbar', $data);
-        $this->load->view('pages/customers/index', $data);
-        $this->load->view('templates/footer');
+        $this->loadCustomerIndex($data);
     }
 
     public function search()
@@ -27,6 +24,11 @@ class Customers extends CI_Controller {
         $data['title'] = 'Search Results';
         $data['translatedTitle'] = 'Clientes';
 
+        $this->loadCustomerIndex($data);
+    }
+
+    public function loadCustomerIndex($data)
+    {
         $this->load->view('templates/header', $data);
         $this->load->view('templates/searchbar', $data);
         $this->load->view('pages/customers/index', $data);
@@ -36,11 +38,10 @@ class Customers extends CI_Controller {
     public function view($id = NULL)
     {
         $data['customer'] = $this->Customer_model->get_customers($id);
-        $data['action'] = "customers/update/{$id}";
+        $data['action'] = "customer/update/{$id}";
 
 
-        if (empty($data['customer'])) 
-        {
+        if (empty($data['customer'])){
             show_404();
         }
 
@@ -51,7 +52,7 @@ class Customers extends CI_Controller {
     }
 
     public function new(){
-        $data['action'] = 'customers/create';
+        $data['action'] = 'customer/create';
         $data['title'] = 'Novo Cliente';
         $data['translatedTitle'] = 'Detalhes do Cliente';
         $data['customer'] = NULL;

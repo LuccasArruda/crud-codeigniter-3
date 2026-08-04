@@ -14,10 +14,7 @@ class Sales extends CI_Controller {
         $data['title'] = 'Sales';
         $data['translatedTitle'] = 'Vendas';
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/searchbar', $data);
-        $this->load->view('pages/sales/index', $data);
-        $this->load->view('templates/footer');
+        $this->loadSaleIndex($data);
     }
 
     public function search()
@@ -27,6 +24,11 @@ class Sales extends CI_Controller {
         $data['title'] = 'Search Results';
         $data['translatedTitle'] = 'Vendas';
 
+        $this->loadSaleIndex($data);
+    }
+
+    public function loadSaleIndex($data)
+    {
         $this->load->view('templates/header', $data);
         $this->load->view('templates/searchbar', $data);
         $this->load->view('pages/sales/index', $data);
@@ -37,7 +39,7 @@ class Sales extends CI_Controller {
     {
         $data['sale'] = $this->Sale_model->get_sales($id);
         $data['customers'] = $this->Customer_model->get_customers();
-        $data['action'] = "sales/update/{$id}";
+        $data['action'] = "sale/update/{$id}";
         
         if (empty($data['sale'])){
             show_404();
@@ -55,7 +57,7 @@ class Sales extends CI_Controller {
         $data['customers'] = $this->Customer_model->get_customers();
         $data['title'] = 'New Sale';
         $data['translatedTitle'] = 'Nova Venda';
-        $data['action'] = 'sales/create';
+        $data['action'] = 'sale/create';
 
         $this->loadSaleView($data);
     }
@@ -67,7 +69,7 @@ class Sales extends CI_Controller {
 
         $data['title'] = 'Create Sale';
         $data['translatedTitle'] = 'Criar Venda';
-        $data['action'] = 'sales/create';
+        $data['action'] = 'sale/create';
 
         $validSale = $this->validateSaleInfo();
         $data['customers'] = $this->Customer_model->get_customers();
