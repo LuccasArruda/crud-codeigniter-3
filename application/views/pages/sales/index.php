@@ -16,10 +16,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php foreach($sales as $sale): ?>
       <tr class="align-middle">
         <th scope="row"><?php echo $sale['ID']; ?></th>
-        <td><?php echo $sale['DATA_CRIACAO']; ?></td>
-        <td><?php echo $sale['VALOR_TOTAL']; ?></td>
+        <td><?php echo date('d/m/Y', strtotime($sale['DATA_CRIACAO'])); ?></td>
+        <td>R$ <?php echo number_format($sale['VALOR_TOTAL'], 2, ',', '.'); ?></td>
         <td><?php echo $sale['NOME_FANTASIA']; ?></td>
-        <td>
+        <td class="d-flex gap-2 justify-content-end">
           <a href="<?php echo base_url("index.php/sale/edit/{$sale['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
           <a href="<?php echo base_url("index.php/sales/delete/{$sale['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>

@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td><?php echo $customer['CNPJ_FORMATADO']; ?></td>
         <td><?php echo $customer['ENDERECO']; ?></td>
         <td>R$ <?php echo number_format($customer['VALOR_FATURAMENTO'], 2, ',', '.'); ?></td>
-        <td>
+        <td class="d-flex gap-2 justify-content-end">
           <a href="<?php echo base_url("index.php/customer/edit/{$customer['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
           <a href="<?php echo base_url("index.php/customer/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>

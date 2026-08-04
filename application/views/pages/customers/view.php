@@ -1,11 +1,13 @@
 <main class="row align-items-center justify-content-center mt-5 p-3 mx-5 gap-5">
     <div class="col-md-6 col-sm-12 rounded-2 bg-white shadow-sm p-5">
-        <?php echo validation_errors(); ?>
+        <div class="alert alert-danger <?= empty(validation_errors()) ? 'd-none' : ''; ?>" role="alert">
+            <?php echo validation_errors(); ?>
+        </div>
         <?php echo form_open($action); ?>
             <fieldset class="row">
                 <legend class="text-center fs-2 mb-4 text-primary">Editar Cliente</legend>
                 <div class="col-6">
-                    <label for="razaoSocial" class="form-label">Razão Social</label>
+                    <label for="razaoSocial" class="form-label">Razão Social <span class="text-danger fw-bold">*</span></label>
                     <input type="text" id="razaoSocial" name="razaoSocial" class="form-control" placeholder="Razão Social" value="<?= isset($customer['RAZAO_SOCIAL']) ? $customer['RAZAO_SOCIAL'] : ''; ?>">
                 </div>                
                 <div class="col-6">
@@ -13,7 +15,7 @@
                     <input type="text" id="nomeFantasia" name="nomeFantasia" class="form-control" placeholder="Nome Fantasia" value="<?= isset($customer['NOME_FANTASIA']) ? $customer['NOME_FANTASIA'] : ''; ?>">
                 </div>
                 <div class="col">
-                    <label for="cnpj" class="form-label">CNPJ</label>
+                    <label for="cnpj" class="form-label">CNPJ <span class="text-danger fw-bold">*</span></label>
                     <input type="text" id="cnpj" name="cnpj" class="form-control" placeholder="CNPJ" value="<?= isset($customer['CNPJ']) ? $customer['CNPJ'] : ''; ?>">
                 </div>
                 <div class="col">

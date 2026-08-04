@@ -1,6 +1,8 @@
 <main class="row align-items-center justify-content-center mt-5 p-3 mx-5 gap-5">
     <div class="col-md-6 col-sm-12 rounded-2 bg-white shadow-sm p-5">
-        <?php echo validation_errors(); ?>
+        <div class="alert alert-danger <?= empty(validation_errors()) ? 'd-none' : ''; ?>" role="alert">
+            <?php echo validation_errors(); ?>
+        </div>
         <?php echo form_open($action); ?>
             <fieldset class="row">
                 <legend class="text-center fs-2 mb-4 text-primary">Editar Venda</legend>
@@ -9,7 +11,7 @@
                     <select id="cliente" name="idCliente" class="form-select">
                         <?php foreach($customers as $customer): ?>
                             <option value="<?= isset($customer['ID']) ? $customer['ID'] : ''; ?>" <?php echo ($customer['ID'] == isset($sale['ID_CLIENTE'])) ? 'selected' : ''; ?>>
-                                <?php echo $customer['NOME_FANTASIA']; ?>
+                                <?php echo empty($customer['NOME_FANTASIA']) ? $customer['RAZAO_SOCIAL'] : $customer['NOME_FANTASIA']; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -22,8 +24,8 @@
                     </div>
                 </div>
                 <div class="col">
-                    <label for="dataGeracao" class="form-label">Data de Criação</label>
-                    <input type="date" id="dataGeracao" name="dataGeracao" class="form-control" placeholder="Data de Geração" value="<?= isset($sale['DATA_CRIACAO']) ? $sale['DATA_CRIACAO'] : ''; ?>">
+                    <label for="dataCriacao" class="form-label">Data de Criação</label>
+                    <input type="date" id="dataCriacao" name="dataCriacao" class="form-control" placeholder="Data de Criação" value="<?= isset($sale['DATA_CRIACAO']) ? $sale['DATA_CRIACAO'] : ''; ?>">
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Salvar</button>
             </fieldset>

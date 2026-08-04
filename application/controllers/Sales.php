@@ -69,12 +69,12 @@ class Sales extends CI_Controller {
 
         $data['title'] = 'Create Sale';
         $data['translatedTitle'] = 'Criar Venda';
-        $data['action'] = 'sale/create';
-
+        
         $validSale = $this->validateSaleInfo();
         $data['customers'] = $this->Customer_model->get_customers();
         
         if(!$validSale){
+            $data['action'] = 'sale/create';
             $this->loadSaleView($data);
             return;
         }
@@ -90,13 +90,13 @@ class Sales extends CI_Controller {
 
         $data['title'] = 'Update Sale';
         $data['translatedTitle'] = 'Atualizar Venda';
-        $data['action'] = "sales/update/{$id}";
-
+        
         $validSale = $this->validateSaleInfo();
         $data['sale'] = $this->Sale_model->get_sales($id);
         $data['customers'] = $this->Customer_model->get_customers();
-
+        
         if(!$validSale){
+            $data['action'] = "sales/update/{$id}";
             $this->loadSaleView($data);
             return;
         }
@@ -117,7 +117,7 @@ class Sales extends CI_Controller {
     {
         $data = array(
             'ID_CLIENTE' => $this->input->post('idCliente'),
-            'DATA_CRIACAO' => $this->input->post('dataGeracao'),
+            'DATA_CRIACAO' => $this->input->post('dataCriacao'),
             'VALOR_TOTAL' => $this->input->post('valorTotal')
         );
 
@@ -127,7 +127,7 @@ class Sales extends CI_Controller {
     public function validateSaleInfo()
     {
         $this->form_validation->set_rules('idCliente', 'Cliente', 'required');
-        $this->form_validation->set_rules('dataGeracao', 'Data de Geração', 'required|date');
+        $this->form_validation->set_rules('dataCriacao', 'Data de Criação', 'required|date');
         $this->form_validation->set_rules('valorTotal', 'Valor Total', 'required|numeric');
 
         return $this->form_validation->run();
