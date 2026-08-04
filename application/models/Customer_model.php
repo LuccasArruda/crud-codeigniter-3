@@ -21,6 +21,7 @@ class Customer_model extends CI_Model{
         $this->db->like('NOME_FANTASIA', $searchTerm);
         $this->db->or_like('RAZAO_SOCIAL', $searchTerm);
         $this->db->or_like('CNPJ', $searchTerm);
+        $this->db->or_like('CNPJ_FORMATADO', $searchTerm);
         $this->db->or_like('ENDERECO', $searchTerm);
         $this->db->or_like('VALOR_FATURAMENTO', $searchTerm);
         $this->db->or_like('ID', $searchTerm);

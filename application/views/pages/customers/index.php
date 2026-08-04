@@ -20,12 +20,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <th scope="row"><?php echo $customer['ID']; ?></th>
         <td><?php echo $customer['RAZAO_SOCIAL']; ?></td>
         <td><?php echo $customer['NOME_FANTASIA']; ?></td>
-        <td><?php echo $customer['CNPJ']; ?></td>
+        <td><?php echo $customer['CNPJ_FORMATADO']; ?></td>
         <td><?php echo $customer['ENDERECO']; ?></td>
-        <td><?php echo $customer['VALOR_FATURAMENTO']; ?></td>
+        <td>R$ <?php echo number_format($customer['VALOR_FATURAMENTO'], 2, ',', '.'); ?></td>
         <td>
           <a href="<?php echo base_url("index.php/customer/edit/{$customer['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
-          <a href="<?php echo base_url("index.php/customers/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
+          <a href="<?php echo base_url("index.php/customer/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>
