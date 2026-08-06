@@ -57,7 +57,7 @@ class Sales extends CI_Controller {
         $data['customers'] = $this->Customer_model->get_customers();
         $data['title'] = 'New Sale';
         $data['translatedTitle'] = 'Nova Venda';
-        $data['action'] = 'sale/create';
+        $data['action'] = 'sales/create';
 
         $this->loadSaleView($data);
     }
@@ -74,7 +74,7 @@ class Sales extends CI_Controller {
         $data['customers'] = $this->Customer_model->get_customers();
         
         if(!$validSale){
-            $data['action'] = 'sale/create';
+            $data['action'] = 'sales/create';
             $this->loadSaleView($data);
             return;
         }

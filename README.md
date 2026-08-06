@@ -91,7 +91,7 @@ Aplicação web para gerenciamento de **clientes** e **vendas**, desenvolvida co
 | `/customers/new` | Novo cliente |
 | `/customers/search?search=termo` | Busca de clientes |
 | `/sales` | Lista de vendas |
-| `/sale/new` | Nova venda |
+| `/sales/new` | Nova venda |
 | `/sales/search?search=termo` | Busca de vendas |
 
 > Se as URLs sem `index.php` não funcionarem no seu servidor, acesse as rotas com o prefixo `index.php/`, por exemplo: `/index.php/customers`.

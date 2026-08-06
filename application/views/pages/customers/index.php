@@ -24,14 +24,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <td><?php echo $customer['ENDERECO']; ?></td>
         <td>R$ <?php echo number_format($customer['VALOR_FATURAMENTO'], 2, ',', '.'); ?></td>
         <td class="d-flex gap-2 justify-content-end">
-          <a href="<?php echo base_url("index.php/customer/edit/{$customer['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
-          <a href="<?php echo base_url("index.php/customer/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
+          <a href="<?php echo base_url("customers/view/{$customer['ID']}"); ?>" class="btn btn-outline-primary material-symbols-outlined text-decoration-none">Edit</a>
+          <a href="<?php echo base_url("customers/delete/{$customer['ID']}"); ?>" class="btn btn-outline-danger material-symbols-outlined text-decoration-none">Delete</a>
         </td>
       </tr>
       <?php endforeach; ?>
     </tbody>
   </table>
-  <button type="button" class="btn btn-outline-primary d-flex align-items-center" onclick="window.location.href='<?php echo base_url('index.php/customer/new'); ?>'">
+  <button type="button" class="btn btn-outline-primary d-flex align-items-center" onclick="window.location.href='<?php echo base_url('customers/new'); ?>'">
     <span class="material-symbols-outlined me-1">add</span>
     Novo Cliente
   </button>

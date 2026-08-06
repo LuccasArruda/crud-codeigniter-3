@@ -14,7 +14,7 @@ class Customers extends CI_Controller {
         $data['title'] = 'Customers';
         $data['translatedTitle'] = 'Clientes';
 
-        $this->loadCustomerIndex($data);
+        $this->_loadCustomerIndex($data);
     }
 
     public function search()
@@ -24,10 +24,10 @@ class Customers extends CI_Controller {
         $data['title'] = 'Search Results';
         $data['translatedTitle'] = 'Clientes';
 
-        $this->loadCustomerIndex($data);
+        $this->_loadCustomerIndex($data);
     }
 
-    public function loadCustomerIndex($data)
+    private function _loadCustomerIndex($data)
     {
         $this->load->view('templates/header', $data);
         $this->load->view('templates/searchbar', $data);
@@ -38,7 +38,7 @@ class Customers extends CI_Controller {
     public function view($id = NULL)
     {
         $data['customer'] = $this->Customer_model->get_customers($id);
-        $data['action'] = "customer/update/{$id}";
+        $data['action'] = "customers/update/{$id}";
 
 
         if (empty($data['customer'])){
@@ -48,17 +48,17 @@ class Customers extends CI_Controller {
         $data['title'] = $data['customer']['NOME_FANTASIA'];
         $data['translatedTitle'] = 'Detalhes do Cliente';
         
-        $this->loadCustomerView($data);
+        $this->_loadCustomerView($data);
     }
 
     public function new()
     {
-        $data['action'] = 'customer/create';
+        $data['action'] = 'customers/create';
         $data['title'] = 'Novo Cliente';
         $data['translatedTitle'] = 'Detalhes do Cliente';
         $data['customer'] = NULL;
 
-        $this->loadCustomerView($data);
+        $this->_loadCustomerView($data);
     }
 
     public function create()
@@ -70,14 +70,14 @@ class Customers extends CI_Controller {
         $data['title'] = 'Create Customer';
         $data['translatedTitle'] = 'Criar Cliente';
 
-        $validCustomer = $this->validateCustomerInfo();
+        $validCustomer = $this->_validateCustomerInfo();
         if (!$validCustomer) {
             $data['action'] = 'customer/create';
-            $this->loadCustomerView($data);
+            $this->_loadCustomerView($data);
             return;
         }
 
-        $this->db->insert('clientes', $this->returnCustomerData());
+        $this->db->insert('clientes', $this->_returnCustomerData());
         redirect('customers');
     }
 
@@ -89,15 +89,15 @@ class Customers extends CI_Controller {
         $data['title'] = 'Update Customer';
         $data['translatedTitle'] = 'Atualizar Cliente';
 
-        $validCustomer = $this->validateCustomerInfo();
+        $validCustomer = $this->_validateCustomerInfo();
         if (!$validCustomer) {
             $data['action'] = "customer/update/{$id}";
-            $this->loadCustomerView($data);
+            $this->_loadCustomerView($data);
             return;
         } 
 
         $this->db->where('ID', $id);
-        $this->db->update('clientes', $this->returnCustomerData());
+        $this->db->update('clientes', $this->_returnCustomerData());
         redirect('customers');
     }
 
@@ -109,7 +109,7 @@ class Customers extends CI_Controller {
 
     }
 
-    public function returnCustomerData()
+    private function _returnCustomerData()
     {
         $data = array(
             'RAZAO_SOCIAL' => $this->input->post('razaoSocial'),
@@ -122,7 +122,7 @@ class Customers extends CI_Controller {
         return $data;
     }
 
-    public function validateCustomerInfo()
+    private function _validateCustomerInfo()
     {
         $this->form_validation->set_rules('razaoSocial', 'Razão Social', 'required');
         $this->form_validation->set_rules('cnpj', 'CNPJ', 'required');
@@ -130,7 +130,7 @@ class Customers extends CI_Controller {
         return $this->form_validation->run();
     }
 
-    public function loadCustomerView($data)
+    private function _loadCustomerView($data)
     {
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
